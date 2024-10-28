@@ -5,19 +5,21 @@ import '../models/cart_model.dart';
 class Item extends StatelessWidget {
   final Product product;
   final Function onDelete;
+  final Function onToggleFavorite;
   final bool isLeftColumn;
 
   const Item({
     Key? key,
     required this.product,
     required this.onDelete,
+    required this.onToggleFavorite,
     required this.isLeftColumn,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key(product.id.toString()), // Убедитесь, что у продукта есть уникальный идентификатор
+      key: Key(product.id.toString()),
       direction: isLeftColumn ? DismissDirection.endToStart : DismissDirection.startToEnd,
       onDismissed: (direction) {
         onDelete();
@@ -32,7 +34,7 @@ class Item extends StatelessWidget {
             border: Border.all(color: Colors.grey),
           ),
           width: double.infinity,
-          height: 600, // Увеличьте это значение по мере необходимости
+          height: 600,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -42,11 +44,11 @@ class Item extends StatelessWidget {
                   child: product.image.startsWith('http')
                       ? Image.network(
                     product.image,
-                    height: 100, // Настройте высоту изображения
+                    height: 100,
                   )
                       : Image.asset(
                     product.image,
-                    height: 100, // Настройте высоту изображения
+                    height: 100,
                   ),
                 ),
               ),
@@ -89,6 +91,15 @@ class Item extends StatelessWidget {
                             },
                             child: const Text('Добавить в корзину'),
                           ),
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            product.isFavorite ? Icons.favorite : Icons.favorite_border,
+                            color: product.isFavorite ? Colors.red : null,
+                          ),
+                          onPressed: () {
+                            onToggleFavorite();
+                          },
                         ),
                       ],
                     ),

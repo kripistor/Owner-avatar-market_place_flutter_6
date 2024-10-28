@@ -135,17 +135,17 @@ class AddProductPage extends StatelessWidget {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     final newProduct = Product(
-                      products.length + 1,
-                      _nameController.text,
-                      _descriptionController.text,
-                      _imageController.text,
-                      double.parse(_priceController.text),
-                      _brandController.text,
-                      _processorController.text,
-                      _ramController.text,
-                      _storageController.text,
-                      _displayController.text,
-                      int.parse(_articleController.text),
+                      id: products.length + 1,
+                      name: _nameController.text,
+                      description: _descriptionController.text,
+                      image: _imageController.text,
+                      price: double.parse(_priceController.text),
+                      brand: _brandController.text,
+                      processor: _processorController.text,
+                      ram: _ramController.text,
+                      storage: _storageController.text,
+                      display: _displayController.text,
+                      article: int.parse(_articleController.text),
                     );
 
                     Navigator.pop(context, newProduct);

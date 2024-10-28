@@ -41,6 +41,11 @@ class _HomePageState extends State<HomePage> {
                   products.removeAt(index);
                 });
               },
+              onToggleFavorite: () {
+                setState(() {
+                  products[index].isFavorite = !products[index].isFavorite; // Изменение статуса избранного
+                });
+              },
               isLeftColumn: index % 2 == 0,
             ),
           );
